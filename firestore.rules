@@ -1,0 +1,37 @@
+rules_version = '2';
+
+/* 미요Lab 한줄평(방명록) 보안 규칙입니다.
+   로그인 없이 누구나 한 줄을 남길 수 있고, 남기면 바로 공개됩니다.
+   대신 아래 조건으로 형태를 제한해 아무 데이터나 넣지 못하게 막습니다.
+
+   - 필드는 author, text, approved, createdAt 네 개만 허용
+   - 이름 20자, 본문 100자 제한
+   - createdAt 은 클라이언트가 정할 수 없고 서버 시간만 허용
+   - 한 번 쓴 글은 클라이언트에서 수정·삭제 불가 (콘솔에서만 삭제)
+
+   승인제로 바꾸려면: read 조건을 resource.data.approved == true 로 바꾸고,
+   create 조건의 approved == true 를 approved == false 로 바꾸면 됩니다. */
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /guestbook/{entryId} {
+      allow read: if true;
+
+      allow create: if request.resource.data.keys().hasOnly(['author', 'text', 'approved', 'createdAt'])
+        && request.resource.data.author is string
+        && request.resource.data.author.size() >= 1
+        && request.resource.data.author.size() <= 20
+        && request.resource.data.text is string
+        && request.resource.data.text.size() >= 1
+        && request.resource.data.text.size() <= 100
+        && request.resource.data.approved == true
+        && request.resource.data.createdAt == request.time;
+
+      allow update, delete: if false;
+    }
+
+    /* 그 밖의 모든 경로는 차단합니다. */
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

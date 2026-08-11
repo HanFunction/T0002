@@ -4,6 +4,13 @@ import { useEffect, useState } from "react";
 import { Spiral, type SpiralProps } from "@paper-design/shaders-react";
 import { asset } from "@/lib/asset";
 import {
+  GUESTBOOK_LIMITS,
+  addGuestbookEntry,
+  isGuestbookEnabled,
+  subscribeGuestbook,
+  type RemoteEntry
+} from "@/lib/firebase";
+import {
   boardPosts,
   cards,
   episodes,
@@ -259,21 +266,95 @@ function BoardTab() {
   );
 }
 
-function GuestbookList({ limit }: { limit?: number }) {
-  const entries = typeof limit === "number" ? guestbook.slice(0, limit) : guestbook;
+function GuestbookForm() {
+  const [author, setAuthor] = useState("");
+  const [text, setText] = useState("");
+  const [sending, setSending] = useState(false);
+  const [message, setMessage] = useState<{ kind: "ok" | "error"; text: string } | null>(null);
+
+  const submit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (sending) return;
+    setSending(true);
+    setMessage(null);
+    try {
+      await addGuestbookEntry(author, text);
+      setAuthor("");
+      setText("");
+      setMessage({ kind: "ok", text: "한줄평을 남겼어요. 고맙습니다!" });
+    } catch (error) {
+      setMessage({ kind: "error", text: error instanceof Error ? error.message : "남기지 못했어요. 잠시 뒤 다시 시도해 주세요." });
+    } finally {
+      setSending(false);
+    }
+  };
 
   return (
-    <div className="cy-guestbook-list">
-      {entries.map(c => (
-        <div key={c.id} className="cy-guestbook-item">
-          <span className="cg-author">
-            {c.author} <span className="cg-colon">:</span>{" "}
-          </span>
-          <span className="cg-text">{c.text}</span>
-          <span className="cg-date">({c.date})</span>
-        </div>
-      ))}
-    </div>
+    <form className="cy-guestbook-form" onSubmit={submit}>
+      <input
+        className="cy-gb-author"
+        value={author}
+        onChange={e => setAuthor(e.target.value)}
+        placeholder="이름"
+        maxLength={GUESTBOOK_LIMITS.author}
+        aria-label="이름"
+      />
+      <input
+        className="cy-gb-text"
+        value={text}
+        onChange={e => setText(e.target.value)}
+        placeholder="한줄평을 남겨주세요"
+        maxLength={GUESTBOOK_LIMITS.text}
+        aria-label="한줄평"
+      />
+      <button className="cy-gb-submit" type="submit" disabled={sending}>
+        {sending ? "전송중" : "남기기"}
+      </button>
+      {message ? (
+        <span className={`cy-gb-message${message.kind === "error" ? " is-error" : ""}`}>{message.text}</span>
+      ) : null}
+    </form>
+  );
+}
+
+function GuestbookList({ limit }: { limit?: number }) {
+  /* Firestore 가 설정되어 있으면 실시간 목록을, 아니면 linktree.ts 의 예시를 보여줍니다. */
+  const seed = typeof limit === "number" ? guestbook.slice(0, limit) : guestbook;
+  const [remote, setRemote] = useState<RemoteEntry[] | null>(null);
+  const [failed, setFailed] = useState(false);
+
+  useEffect(() => {
+    if (!isGuestbookEnabled) return;
+    return subscribeGuestbook(limit ?? 30, setRemote, () => setFailed(true));
+  }, [limit]);
+
+  const live = isGuestbookEnabled && !failed;
+  const entries = live && remote
+    ? remote.map(e => ({ key: e.id, ...e }))
+    : seed.map(e => ({ key: String(e.id), ...e }));
+
+  return (
+    <>
+      {live && remote === null ? <div className="cy-gb-loading">한줄평을 불러오는 중…</div> : null}
+
+      <div className="cy-guestbook-list">
+        {entries.length === 0 ? (
+          <div className="cy-gb-loading">아직 한줄평이 없어요. 첫 줄을 남겨 주세요!</div>
+        ) : (
+          entries.map(c => (
+            <div key={c.key} className="cy-guestbook-item">
+              <span className="cg-author">
+                {c.author} <span className="cg-colon">:</span>{" "}
+              </span>
+              <span className="cg-text">{c.text}</span>
+              <span className="cg-date">({c.date})</span>
+            </div>
+          ))
+        )}
+      </div>
+
+      {live ? <GuestbookForm /> : null}
+    </>
   );
 }
 

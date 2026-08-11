@@ -712,6 +712,82 @@ html, body {
 .cg-text { color: #444; }
 .cg-date { font-family: "Tahoma"; font-size: 0.65rem; color: #999; margin-left: 5px; }
 
+/* 한줄평 입력 폼 */
+.cy-gb-loading {
+  font-size: 0.75rem;
+  color: #999;
+  padding: 4px 0;
+}
+
+.cy-guestbook-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+}
+
+.cy-gb-author,
+.cy-gb-text {
+  font-family: inherit;
+  font-size: 0.75rem;
+  padding: 5px 7px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  color: #444;
+  background: #fff;
+}
+
+.cy-gb-author {
+  width: 80px;
+  flex-shrink: 0;
+}
+
+.cy-gb-text {
+  flex: 1;
+  min-width: 120px;
+}
+
+.cy-gb-author:focus,
+.cy-gb-text:focus {
+  outline: none;
+  border-color: #9CBBA6;
+}
+
+.cy-gb-submit {
+  flex-shrink: 0;
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 5px 12px;
+  border: 1px solid #779683;
+  border-radius: 3px;
+  background: #9CBBA6;
+  color: #fff;
+  cursor: pointer;
+}
+
+.cy-gb-submit:hover:not(:disabled) {
+  background: #8ac08a;
+}
+
+.cy-gb-submit:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* 전송 결과 안내. 폼 아래 한 줄을 차지합니다. */
+.cy-gb-message {
+  flex-basis: 100%;
+  font-size: 0.72rem;
+  color: #547A60;
+}
+
+.cy-gb-message.is-error {
+  color: #c0392b;
+}
+
 
 /* ------------------------------------- */
 /* TABS                                  */
