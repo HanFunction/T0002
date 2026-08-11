@@ -1,14 +1,14 @@
 {
-  "name": "dorms-linktree-template",
+  "name": "miyo-lab",
   "version": "1.0.0",
   "private": false,
   "license": "MIT",
-  "author": "shinnanchanguk",
+  "author": "Pcallpang",
   "repository": {
     "type": "git",
-    "url": "https://github.com/shinnanchanguk/dorms-linktree-template.git"
+    "url": "https://github.com/Pcallpang/miyo-lab.git"
   },
-  "homepage": "https://github.com/shinnanchanguk/dorms-linktree-template#readme",
+  "homepage": "https://pcallpang.github.io/miyo-lab/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
