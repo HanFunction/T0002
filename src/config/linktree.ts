@@ -185,12 +185,12 @@ export const boardPosts: BoardPost[] = [
     preview: { src: "/assets/miyo/miyo-03.jpg", alt: "갓미요 캐릭터" }
   },
   {
-    id: "osaka-trip",
+    id: "miyo-trip",
     category: "앱",
     title: "야르미요의 여행플래너",
     summary: "여행 일정을 D-day와 함께 모아 보는 플래너입니다.",
     date: "2026.08.11",
-    href: "https://pcallpang.github.io/miyo-trip/",
+    href: "https://miyo-trip.vercel.app/",
     preview: { src: "/assets/miyo/miyo-14.jpg", alt: "야르미요 캐릭터" }
   }
 ];
