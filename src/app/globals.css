@@ -113,6 +113,7 @@ html, body {
 
 /* Background Pattern (풀밭/그라데이션 감성) */
 .cy-root {
+  position: relative; /* 배경 패턴이 스크롤 영역 전체를 덮게 합니다 */
   min-height: 100svh;
   display: flex;
   align-items: center;
@@ -765,12 +766,141 @@ html, body {
 }
 
 /* ------------------------------------- */
-/* 모바일 대응 (반응형 억제 또는 스크롤 허용) */
+/* 반응형                                 */
 /* ------------------------------------- */
-@media (max-width: 1080px) {
+
+/* 데스크톱이지만 폭이 부족할 때. 우측 탭이 화면 밖으로 잘리지 않게 여백을 확보합니다. */
+@media (max-width: 1180px) and (min-width: 901px) {
+  .cy-root {
+    justify-content: flex-start;
+    padding: 2rem 5rem 2rem 2rem;
+    overflow-x: auto;
+  }
+}
+
+/* 태블릿·모바일: 다이어리 펼침을 위아래로 접고 탭을 가로줄로 바꿉니다. */
+@media (max-width: 900px) {
   .cy-root {
     align-items: flex-start;
-    justify-content: flex-start;
-    overflow-x: auto; /* 고정 크기이므로 스크롤 가능하게 */
+    padding: 12px;
+  }
+
+  .cy-book-wrapper {
+    width: 100%;
+    max-width: 560px;
+    height: auto;
+  }
+
+  .cy-book-outer {
+    height: auto;
+    padding: 10px;
+    box-shadow: inset 0 0 0 2px #fff, 0 6px 18px rgba(0,0,0,0.18);
+  }
+
+  /* 스프링은 가로 배치에서만 의미가 있습니다. */
+  .cy-bindings {
+    display: none;
+  }
+
+  .cy-book-inner {
+    flex-direction: column;
+    height: auto;
+  }
+
+  /* DOM 순서는 좌측패널 → 우측패널 → 탭 이므로 탭을 우측패널 위로 올립니다. */
+  .cy-left-panel { order: 1; }
+  .cy-tabs { order: 2; }
+  .cy-right-panel { order: 3; }
+
+  .cy-left-panel {
+    width: 100%;
+    height: auto;
+    padding: 12px;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .cy-left-content {
+    padding: 12px;
+  }
+
+  .cy-profile-pic {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 12px;
+  }
+
+  /* 데스크톱에서는 남는 높이를 채우며 자체 스크롤했지만, 모바일에서는 글 길이만큼 늘어납니다. */
+  .cy-intro-text {
+    flex: 0 0 auto;
+    overflow: visible;
+    margin-bottom: 12px;
+  }
+
+  /* 탭을 가로 줄로 */
+  .cy-tabs {
+    position: static;
+    right: auto;
+    top: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 10px 12px 0;
+  }
+
+  .cy-tab-btn,
+  .cy-tab-btn:hover,
+  .cy-tab-btn.active {
+    width: auto;
+  }
+
+  .cy-tab-btn {
+    flex: 1 1 auto;
+    min-width: 58px;
+    min-height: 34px;
+    padding: 6px 8px;
+    border: 1px solid #779683;
+    border-radius: 6px 6px 0 0;
+  }
+
+  .cy-right-panel {
+    padding: 0 12px 12px;
+    border-radius: 0 0 8px 8px;
+  }
+
+  /* 패널이 자체 스크롤하는 대신 페이지가 스크롤되게 합니다. */
+  .cy-right-content {
+    flex: 0 0 auto;
+    overflow: visible;
+    padding: 12px;
+  }
+
+  .cy-episode-grid,
+  .cy-photo-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* 좁은 휴대폰 */
+@media (max-width: 480px) {
+  .cy-root {
+    padding: 8px;
+  }
+
+  .cy-episode-grid,
+  .cy-photo-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* 미요앱 미리보기 카드가 좁은 폭에서 눌리지 않게 썸네일을 줄입니다. */
+  .cy-board-preview {
+    width: 72px;
+    height: 72px;
+  }
+
+  .cy-tab-btn {
+    font-size: 0.68rem;
+    min-width: 52px;
   }
 }
