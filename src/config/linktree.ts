@@ -192,6 +192,15 @@ export const boardPosts: BoardPost[] = [
     date: "2026.08.11",
     href: "https://miyo-trip.vercel.app/",
     preview: { src: "/assets/miyo/miyo-14.jpg", alt: "야르미요 캐릭터" }
+  },
+  {
+    id: "miyo-planner",
+    category: "앱",
+    title: "미요의 플래너",
+    summary: "할 일과 일정을 미요와 함께 계획하고 관리하는 플래너입니다.",
+    date: "2026.08.14",
+    href: "https://miyo-planner.vercel.app/",
+    preview: { src: "/assets/miyo/miyo-01.jpg", alt: "미요 캐릭터" }
   }
 ];
 
