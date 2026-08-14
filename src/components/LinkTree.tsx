@@ -7,9 +7,12 @@ import BgmPlayer, { type BgmHandle } from "@/components/BgmPlayer";
 import {
   GUESTBOOK_LIMITS,
   addGuestbookEntry,
+  isCounterEnabled,
   isGuestbookEnabled,
+  recordVisit,
   subscribeGuestbook,
-  type RemoteEntry
+  type RemoteEntry,
+  type VisitCounts
 } from "@/lib/firebase";
 import {
   boardPosts,
@@ -359,6 +362,33 @@ function GuestbookList({ limit }: { limit?: number }) {
   );
 }
 
+/* 미니홈피 왼쪽 위 방문 수입니다. 들어올 때마다 한 번 기록하고 그 결과를 보여 줍니다.
+   Firestore 가 설정되지 않았거나 아직 못 받았으면 숫자 자리를 - 로 둡니다. */
+function VisitCounter() {
+  const [counts, setCounts] = useState<VisitCounts | null>(null);
+  /* 개발 모드에서 효과가 두 번 실행돼 2씩 오르는 것을 막습니다. */
+  const sentRef = useRef(false);
+
+  useEffect(() => {
+    if (!isCounterEnabled || sentRef.current) return;
+    sentRef.current = true;
+    recordVisit()
+      .then(setCounts)
+      .catch(() => setCounts(null));
+  }, []);
+
+  const show = (value: number | undefined) =>
+    typeof value === "number" ? value.toLocaleString() : "-";
+
+  return (
+    <span className="cy-today-count">
+      TODAY <span className="text-orange">{show(counts?.today)}</span>
+      {" | "}
+      TOTAL <span className="text-black">{show(counts?.total)}</span>
+    </span>
+  );
+}
+
 function PhotoTab() {
   return (
     <div className="cy-content-box">
@@ -419,7 +449,7 @@ export default function LinkTree() {
             {/* 좌측 패널 */}
             <div className="cy-left-panel">
               <div className="cy-left-header">
-                <span className="cy-today-count">TODAY <span className="text-orange">23</span> | TOTAL <span className="text-black">15392</span></span>
+                <VisitCounter />
               </div>
               <div className="cy-left-content">
                 <div className="cy-today-is">TODAY IS.. <span className="text-orange">맑음 ☀️</span></div>

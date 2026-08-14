@@ -29,6 +29,37 @@ service cloud.firestore {
       allow update, delete: if false;
     }
 
+    /* 미니홈피 왼쪽 위 TODAY / TOTAL 방문 수입니다. 문서 하나만 씁니다.
+
+       - 한 번에 total 을 1씩만 올릴 수 있습니다
+       - 날짜(day)가 바뀐 첫 방문이면 today 는 1로 돌아갑니다
+       - 필드는 total, today, day 세 개만 허용하고 삭제는 막습니다
+
+       day 문자열이 진짜 오늘인지는 규칙에서 확인하지 못합니다.
+       조작하더라도 today 가 1로 리셋되는 정도이고 total 은 영향받지 않습니다. */
+    match /counters/site {
+      allow read: if true;
+
+      allow create: if request.resource.data.keys().hasOnly(['total', 'today', 'day'])
+        && request.resource.data.total == 1
+        && request.resource.data.today == 1
+        && request.resource.data.day is string;
+
+      allow update: if request.resource.data.keys().hasOnly(['total', 'today', 'day'])
+        && request.resource.data.total is int
+        && request.resource.data.today is int
+        && request.resource.data.day is string
+        && request.resource.data.total == resource.data.total + 1
+        && (
+          (request.resource.data.day == resource.data.day
+            && request.resource.data.today == resource.data.today + 1)
+          || (request.resource.data.day != resource.data.day
+            && request.resource.data.today == 1)
+        );
+
+      allow delete: if false;
+    }
+
     /* 그 밖의 모든 경로는 차단합니다. */
     match /{document=**} {
       allow read, write: if false;

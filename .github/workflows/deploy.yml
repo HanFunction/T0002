@@ -33,6 +33,15 @@ jobs:
           # 프로젝트 페이지는 /<저장소이름> 하위에서 서비스됩니다.
           NEXT_PUBLIC_BASE_PATH: /miyo-lab
           NEXT_PUBLIC_SITE_URL: https://pcallpang.github.io/miyo-lab
+          # 한줄평과 방문 수에 쓰는 Firebase 설정입니다.
+          # 웹 설정값은 비밀키가 아니라 프로젝트 식별자이고 배포된 JS 에 그대로 들어갑니다.
+          # 접근 제어는 firestore.rules 가 담당합니다.
+          NEXT_PUBLIC_FIREBASE_API_KEY: ${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}
+          NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: ${{ secrets.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN }}
+          NEXT_PUBLIC_FIREBASE_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_PROJECT_ID }}
+          NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: ${{ secrets.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET }}
+          NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID }}
+          NEXT_PUBLIC_FIREBASE_APP_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_APP_ID }}
         run: npm run build
 
       - uses: actions/configure-pages@v5

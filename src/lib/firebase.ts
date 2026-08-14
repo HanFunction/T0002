@@ -6,11 +6,13 @@ import { initializeApp, getApps, type FirebaseApp } from "firebase/app";
 import {
   addDoc,
   collection,
+  doc,
   getFirestore,
   limit as fsLimit,
   onSnapshot,
   orderBy,
   query,
+  runTransaction,
   serverTimestamp,
   type Firestore,
   type Timestamp
@@ -57,6 +59,49 @@ function formatDate(value: unknown) {
   const mm = String(date.getMonth() + 1).padStart(2, "0");
   const dd = String(date.getDate()).padStart(2, "0");
   return `${yyyy}.${mm}.${dd}`;
+}
+
+/* ---------------------------------------------------------------
+   미니홈피 왼쪽 위 TODAY / TOTAL 방문 수입니다.
+   counters/site 문서 하나에 total, today, day 를 담아 둡니다.
+   --------------------------------------------------------------- */
+
+/* 한줄평과 같은 Firebase 설정을 씁니다. */
+export const isCounterEnabled = isGuestbookEnabled;
+
+export type VisitCounts = { total: number; today: number };
+
+/* 하루 경계를 방문자 시간대가 아니라 한국 시간으로 맞춥니다. 2026-08-14 형태입니다. */
+function seoulDay() {
+  return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(new Date());
+}
+
+/* 방문 한 번을 기록하고 갱신된 값을 돌려줍니다.
+   읽기와 쓰기를 한 트랜잭션으로 처리해서 동시에 들어와도 숫자가 어긋나지 않습니다. */
+export async function recordVisit(): Promise<VisitCounts> {
+  const store = getDb();
+  if (!store) throw new Error("방문 수 기능이 설정되지 않았습니다.");
+
+  const ref = doc(store, "counters", "site");
+  const day = seoulDay();
+
+  return runTransaction(store, async transaction => {
+    const snapshot = await transaction.get(ref);
+
+    if (!snapshot.exists()) {
+      const first = { total: 1, today: 1, day };
+      transaction.set(ref, first);
+      return { total: first.total, today: first.today };
+    }
+
+    const data = snapshot.data();
+    const total = Number(data.total ?? 0) + 1;
+    /* 날짜가 바뀐 뒤 첫 방문이면 오늘 수를 다시 1부터 셉니다. */
+    const today = data.day === day ? Number(data.today ?? 0) + 1 : 1;
+
+    transaction.update(ref, { total, today, day });
+    return { total, today };
+  });
 }
 
 /* 한줄평을 실시간으로 구독합니다. 정리 함수를 돌려줍니다. */
