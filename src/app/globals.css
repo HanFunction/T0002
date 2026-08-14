@@ -9,6 +9,11 @@ html, body {
   color: #333;
 }
 
+/* 진입 화면이 떠 있는 동안에는 뒤에 깔린 미니홈피가 스크롤되지 않게 막습니다. */
+body.lt-intro-open {
+  overflow: hidden;
+}
+
 /* 진입 화면 (미니홈피 들어가기 전 Spiral 셰이더 오버레이) */
 .lt-intro {
   position: fixed;
@@ -274,6 +279,145 @@ html, body {
   padding: 3px;
   border: 1px solid #ccc;
   color: #555;
+}
+
+/* ------------------------------------- */
+/* BGM 미니 플레이어                      */
+/* ------------------------------------- */
+/* 창이 짧을 때 미니홈피 바깥으로 밀려나지 않도록, 곡 목록이 먼저 줄어들게 합니다. */
+.cy-bgm {
+  width: 100%;
+  margin-bottom: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #fbfbfb;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.cy-bgm-heading {
+  font-size: 0.7rem;
+  color: #888;
+  letter-spacing: 0.02em;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 4px;
+  margin-bottom: 5px;
+}
+
+.cy-bgm-list {
+  list-style: none;
+  margin: 0 0 5px;
+  padding: 0;
+  max-height: 72px;
+  overflow-y: auto;
+  flex: 0 1 auto;
+  min-height: 26px;
+}
+
+.cy-bgm-track {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  width: 100%;
+  padding: 2px 1px;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 0.7rem;
+  color: #555;
+  text-align: left;
+  cursor: pointer;
+}
+.cy-bgm-track:hover { color: #ff6600; }
+.cy-bgm-track.is-current { color: #ff6600; font-weight: bold; }
+
+.cy-bgm-mark {
+  width: 9px;
+  flex: none;
+  font-size: 0.6rem;
+}
+
+.cy-bgm-no {
+  flex: none;
+  font-family: "Tahoma", sans-serif;
+}
+
+.cy-bgm-name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* 한 영상 안에서 곡이 시작하는 지점입니다. */
+.cy-bgm-time {
+  margin-left: auto;
+  padding-left: 4px;
+  flex: none;
+  font-family: "Tahoma", sans-serif;
+  font-size: 0.62rem;
+  color: #aaa;
+}
+.cy-bgm-track.is-current .cy-bgm-time { color: #ffa366; }
+
+.cy-bgm-controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border-top: 1px solid #eee;
+  padding-top: 5px;
+}
+
+.cy-bgm-controls button {
+  flex: none;
+  min-width: 22px;
+  padding: 1px 3px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background: #fff;
+  font-size: 0.65rem;
+  line-height: 1.4;
+  color: #555;
+  cursor: pointer;
+}
+.cy-bgm-controls button:hover {
+  border-color: #ff6600;
+  color: #ff6600;
+}
+
+.cy-bgm-controls input[type="range"] {
+  flex: 1;
+  min-width: 0;
+  height: 12px;
+  accent-color: #ff6600;
+  cursor: pointer;
+}
+
+.cy-bgm-artist {
+  margin-top: 4px;
+  font-size: 0.65rem;
+  color: #999;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.cy-bgm-note {
+  margin-top: 4px;
+  font-size: 0.65rem;
+  color: #ff6600;
+}
+
+/* 유튜브 iframe 자리입니다. 소리만 쓰기 때문에 화면 밖으로 보냅니다.
+   크기를 0 으로 두면 재생이 막히는 경우가 있어 그대로 둡니다. */
+.cy-bgm-stage {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  width: 200px;
+  height: 200px;
+  pointer-events: none;
 }
 
 /* ------------------------------------- */
@@ -912,6 +1056,11 @@ html, body {
     flex: 0 0 auto;
     overflow: visible;
     margin-bottom: 12px;
+  }
+
+  /* 세로 여백이 넉넉하므로 곡 목록을 접지 않고 다 보여 줍니다. */
+  .cy-bgm-list {
+    max-height: none;
   }
 
   /* 탭을 가로 줄로 */

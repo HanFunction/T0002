@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Spiral, type SpiralProps } from "@paper-design/shaders-react";
 import { asset } from "@/lib/asset";
+import BgmPlayer, { type BgmHandle } from "@/components/BgmPlayer";
 import {
   GUESTBOOK_LIMITS,
   addGuestbookEntry,
@@ -378,6 +379,7 @@ function PhotoTab() {
 export default function LinkTree() {
   const [activeTab, setActiveTab] = useState<TabName>("홈");
   const [introSkipped, setIntroSkipped] = useState(false);
+  const bgmRef = useRef<BgmHandle>(null);
 
   /* ?tab=프로필 처럼 탭 딥링크로 들어오면 진입 화면을 건너뜁니다.
      정적 배포에서도 동작하도록 브라우저에서 읽습니다. */
@@ -390,10 +392,15 @@ export default function LinkTree() {
     }
   }, []);
 
-  if (!introSkipped) {
-    return <IntroOverlay onBrowse={() => setIntroSkipped(true)} />;
-  }
+  /* 인트로가 떠 있는 동안에는 뒤쪽이 스크롤되지 않게 막습니다. */
+  useEffect(() => {
+    if (introSkipped) return;
+    document.body.classList.add("lt-intro-open");
+    return () => document.body.classList.remove("lt-intro-open");
+  }, [introSkipped]);
 
+  /* 본문을 항상 그려 두고 인트로를 그 위에 덮습니다. (.lt-intro 는 position: fixed 입니다)
+     BGM 플레이어가 미리 준비되어 있어야 인트로 클릭 한 번으로 재생이 시작됩니다. */
   return (
     <div className="cy-root">
       <div className="cy-background-pattern"></div>
@@ -424,6 +431,8 @@ export default function LinkTree() {
                 <div className="cy-intro-text">
                   {profile.introDescription}
                 </div>
+
+                <BgmPlayer ref={bgmRef} />
 
                 <div className="cy-profile-name">
                   <div className="name-bold">{profile.teacherName}</div>
@@ -481,6 +490,16 @@ export default function LinkTree() {
           </div>
         </div>
       </div>
+
+      {!introSkipped ? (
+        <IntroOverlay
+          onBrowse={() => {
+            /* 클릭 안에서 재생을 걸어야 브라우저가 소리를 허용합니다. */
+            bgmRef.current?.start();
+            setIntroSkipped(true);
+          }}
+        />
+      ) : null}
     </div>
   );
 }
