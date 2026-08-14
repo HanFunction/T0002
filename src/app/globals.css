@@ -883,6 +883,36 @@ body.lt-intro-open {
 .cg-text { color: #444; }
 .cg-date { font-family: "Tahoma"; font-size: 0.65rem; color: #999; margin-left: 5px; }
 
+/* 한줄평 페이지 번호 */
+.cy-gb-pagination {
+  display: flex;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.cy-gb-page {
+  font-family: inherit;
+  font-size: 0.72rem;
+  width: 22px;
+  height: 22px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  background: #fff;
+  color: #888;
+  cursor: pointer;
+}
+
+.cy-gb-page:hover {
+  border-color: #9CBBA6;
+  color: #547A60;
+}
+
+.cy-gb-page.is-active {
+  background: #9CBBA6;
+  border-color: #779683;
+  color: #fff;
+}
+
 /* 한줄평 입력 폼 */
 .cy-gb-loading {
   font-size: 0.75rem;

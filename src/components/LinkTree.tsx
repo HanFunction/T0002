@@ -131,7 +131,7 @@ function HomeTab() {
 
       <div className="cy-content-box">
         <SectionTitle title="What friends say" sub="한마디로 표현한다면~" />
-        <GuestbookList limit={3} />
+        <GuestbookList />
       </div>
     </>
   );
@@ -321,21 +321,31 @@ function GuestbookForm() {
   );
 }
 
-function GuestbookList({ limit }: { limit?: number }) {
+const GUESTBOOK_FETCH_LIMIT = 30;
+const GUESTBOOK_PAGE_SIZE = 5;
+
+function GuestbookList() {
   /* Firestore 가 설정되어 있으면 실시간 목록을, 아니면 linktree.ts 의 예시를 보여줍니다. */
-  const seed = typeof limit === "number" ? guestbook.slice(0, limit) : guestbook;
   const [remote, setRemote] = useState<RemoteEntry[] | null>(null);
   const [failed, setFailed] = useState(false);
+  const [page, setPage] = useState(0);
 
   useEffect(() => {
     if (!isGuestbookEnabled) return;
-    return subscribeGuestbook(limit ?? 30, setRemote, () => setFailed(true));
-  }, [limit]);
+    return subscribeGuestbook(GUESTBOOK_FETCH_LIMIT, setRemote, () => setFailed(true));
+  }, []);
 
   const live = isGuestbookEnabled && !failed;
   const entries = live && remote
     ? remote.map(e => ({ key: e.id, ...e }))
-    : seed.map(e => ({ key: String(e.id), ...e }));
+    : guestbook.map(e => ({ key: String(e.id), ...e }));
+
+  const pageCount = Math.max(1, Math.ceil(entries.length / GUESTBOOK_PAGE_SIZE));
+  const currentPage = Math.min(page, pageCount - 1);
+  const pageEntries = entries.slice(
+    currentPage * GUESTBOOK_PAGE_SIZE,
+    currentPage * GUESTBOOK_PAGE_SIZE + GUESTBOOK_PAGE_SIZE
+  );
 
   return (
     <>
@@ -345,7 +355,7 @@ function GuestbookList({ limit }: { limit?: number }) {
         {entries.length === 0 ? (
           <div className="cy-gb-loading">아직 한줄평이 없어요. 첫 줄을 남겨 주세요!</div>
         ) : (
-          entries.map(c => (
+          pageEntries.map(c => (
             <div key={c.key} className="cy-guestbook-item">
               <span className="cg-author">
                 {c.author} <span className="cg-colon">:</span>{" "}
@@ -356,6 +366,22 @@ function GuestbookList({ limit }: { limit?: number }) {
           ))
         )}
       </div>
+
+      {pageCount > 1 ? (
+        <div className="cy-gb-pagination">
+          {Array.from({ length: pageCount }, (_, i) => (
+            <button
+              key={i}
+              type="button"
+              className={`cy-gb-page${i === currentPage ? " is-active" : ""}`}
+              onClick={() => setPage(i)}
+              aria-current={i === currentPage ? "page" : undefined}
+            >
+              {i + 1}
+            </button>
+          ))}
+        </div>
+      ) : null}
 
       {live ? <GuestbookForm /> : null}
     </>
