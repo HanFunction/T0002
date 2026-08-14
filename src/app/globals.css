@@ -1058,9 +1058,9 @@ body.lt-intro-open {
     margin-bottom: 12px;
   }
 
-  /* 세로 여백이 넉넉하므로 곡 목록을 접지 않고 다 보여 줍니다. */
+  /* 곡이 많아서 다 펼치면 화면을 다 잡아먹습니다. 목록 안에서 스크롤하게 둡니다. */
   .cy-bgm-list {
-    max-height: none;
+    max-height: 96px;
   }
 
   /* 탭을 가로 줄로 */
