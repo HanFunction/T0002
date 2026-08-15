@@ -191,6 +191,22 @@ export const episodes: Episode[] = [
     ]
   },
   {
+    id: "ep14",
+    label: "14화",
+    title: "",
+    thumb: "/assets/miyotoon/ep14/thumb.jpg",
+    cuts: [
+      "/assets/miyotoon/ep14/cut-01.jpg",
+      "/assets/miyotoon/ep14/cut-02.jpg",
+      "/assets/miyotoon/ep14/cut-03.jpg",
+      "/assets/miyotoon/ep14/cut-04.jpg",
+      "/assets/miyotoon/ep14/cut-05.jpg",
+      "/assets/miyotoon/ep14/cut-06.jpg",
+      "/assets/miyotoon/ep14/cut-07.jpg",
+      "/assets/miyotoon/ep14/cut-08.jpg",
+    ]
+  },
+  {
     id: "extra",
     label: "번외편",
     title: "",
