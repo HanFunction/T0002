@@ -201,6 +201,15 @@ export const boardPosts: BoardPost[] = [
     date: "2026.08.14",
     href: "https://miyo-planner.vercel.app/",
     preview: { src: "/assets/miyo/miyo-01.jpg", alt: "미요 캐릭터" }
+  },
+  {
+    id: "majorcompass",
+    category: "앱",
+    title: "왜요의 전공 맞춤 진로 설계",
+    summary: "우리 학교 편제표에 맞춰 희망학과 선택 과목을 추천해주는 도구입니다.",
+    date: "2026.08.16",
+    href: "https://majorcompass-phi.vercel.app/",
+    preview: { src: "/assets/miyo/miyo-13.jpg", alt: "왜요미요 캐릭터" }
   }
 ];
 
