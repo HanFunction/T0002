@@ -24,9 +24,13 @@ npm run dev
 
 ## AI에게 맡길 때
 
-이 저장소에는 `AGENTS.md`, `CLAUDE.md`, `.github/copilot-instructions.md`가 들어 있습니다. AI 코딩 도구가 이 저장소를 열면 먼저 필요한 질문을 하고, 그 답으로 링크트리를 채우도록 안내합니다.
+가장 쉬운 방법: 이 저장소를 포크한 뒤, 쓰고 있는 AI 코딩 도구에 이렇게만 말하세요.
 
-직접 붙여넣을 프롬프트는 [docs/AI_CUSTOMIZE_PROMPT.md](docs/AI_CUSTOMIZE_PROMPT.md)에 있습니다.
+> 이 깃허브 저장소로 내 링크트리를 만들고 싶어: (자기 저장소 링크). `docs/AI_CUSTOMIZE_PROMPT.md`를 읽고 그대로 진행해줘.
+
+파일을 직접 열어보거나 내용을 복사해서 붙여넣을 필요 없이, AI가 알아서 `docs/AI_CUSTOMIZE_PROMPT.md`를 읽고 질문하거나(또는 미리 채워둔 [docs/나만의-링크트리-양식.md](docs/나만의-링크트리-양식.md)를 반영해서) 코드를 수정합니다.
+
+이 저장소에는 `AGENTS.md`, `CLAUDE.md`, `.github/copilot-instructions.md`도 들어 있어서, Claude Code처럼 저장소를 직접 열어 쓰는 도구는 별다른 안내 없이도 규칙을 자동으로 따릅니다.
 
 ## 반드시 지키는 기본값
 
