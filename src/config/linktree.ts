@@ -210,6 +210,15 @@ export const boardPosts: BoardPost[] = [
     date: "2026.08.16",
     href: "https://majorcompass-phi.vercel.app/",
     preview: { src: "/assets/miyo/miyo-13.jpg", alt: "왜요미요 캐릭터" }
+  },
+  {
+    id: "naengjanggo",
+    category: "앱",
+    title: "훈수미요의 냉장고를 부탁해",
+    summary: "냉장고 속 재료로 만들 수 있는 요리를 추천해주는 도구입니다.",
+    date: "2026.08.23",
+    href: "https://naengjanggo-butakhae.vercel.app/",
+    preview: { src: "/assets/miyo/miyo-09.jpg", alt: "훈수미요 캐릭터" }
   }
 ];
 
