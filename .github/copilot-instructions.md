@@ -4,7 +4,7 @@ This is a public DoRms community mini-homepage (Cyworld-style) linktree kit, not
 
 If the current folder is still the original template (not yet the user's own copy) and they only gave the source URL, fork it yourself with `gh repo fork https://github.com/Pcallpang/meyo-lab --fork-name <name> --clone --remote` (ask for a name, default `mini-homepage`) instead of asking them to fork manually. Update `package.json`'s `name`/`homepage`/`repository.url` to match.
 
-Before customizing, present this as one checklist in a single message, not asked one at a time:
+Before customizing, ask these one at a time in a back-and-forth conversation — not all dumped into a single message. Say once up front that there are 13 questions and unwanted ones can just be answered "skip", then go through them in order, waiting for each answer before asking the next:
 
 Required (site can't work without these):
 - Display name
