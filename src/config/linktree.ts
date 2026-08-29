@@ -1,23 +1,23 @@
 export const profile = {
-  teacherName: "테스트",
-  title: "테스트",
-  introTitle: "테스트",
-  introDescription: "테스트중입니다",
+  teacherName: "",
+  title: "나의 링크트리",
+  introTitle: "나의 링크트리",
+  introDescription: "",
   catalogTitle: "게시판",
-  catalogDescription: "테스트중입니다",
+  catalogDescription: "",
   /* 왼쪽 프로필 사진입니다. public/assets/ 안에 파일을 넣고 경로를 적으세요. */
   photo: { src: "", alt: "" },
   /* 홈 탭 위쪽 미니룸 이미지입니다. public/assets/ 안에 파일을 넣고 경로를 적으세요. */
-  miniroom: { src: "/assets/miyo-miniroom.png", alt: "미니룸" },
+  miniroom: { src: "", alt: "" },
   /* 아래는 탭 이름표입니다. 나만의 이름으로 바꿔도 되고, 안 바꾸면 기본값 그대로 나옵니다. */
-  storyLabel: "미요툰",
+  storyLabel: "연재물",
   boardLabel: "게시판",
   boardSubtitle: "앱과 게시글",
   boardEmptyText: "아직 올린 글이 없습니다.",
   photoLabel: "사진첩",
   photoSubtitlePrefix: "사진",
   /* 오른쪽 위, 옛날 싸이월드 주소창을 흉내 낸 문구입니다. */
-  displayUrl: "http://cyworld.com/test"
+  displayUrl: ""
 };
 
 /* 프로필 탭에 들어가는 소개 글입니다. 문구만 바꿔서 쓰세요. */
@@ -34,18 +34,7 @@ export type ProfileSection = {
   blocks: ProfileBlock[];
 };
 
-export const profileSections: ProfileSection[] = [
-  {
-    id: "intro",
-    title: "소개",
-    blocks: [
-      {
-        kind: "text",
-        lines: ["가나다라마바사 테스트 입니다"]
-      }
-    ]
-  }
-];
+export const profileSections: ProfileSection[] = [];
 
 /* 미요툰 회차는 src/config/miyotoon.ts 에 있습니다. */
 export { episodes, type Episode } from "./miyotoon";
@@ -83,7 +72,7 @@ export type WaveLink = {
 };
 
 export const waveLinks: WaveLink[] = [
-  { id: "dorms-activity", label: "도름스 커뮤니티 나의 활동", href: "https://www.naver.com" }
+  { id: "dorms-activity", label: "도름스 커뮤니티 나의 활동", href: "" }
 ];
 
 /* 미니홈피 BGM 입니다. 유튜브 영상을 음원으로 씁니다.
