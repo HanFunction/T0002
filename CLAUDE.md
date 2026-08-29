@@ -1,10 +1,10 @@
 # Claude Instructions
 
-이 저장소는 DoRms 커뮤니티 구성원이 자기 링크트리를 만드는 공개 템플릿입니다. DoRms 본 서비스 저장소가 아닙니다.
+이 저장소는 DoRms 커뮤니티 구성원이 옛날 싸이월드 미니홈피 느낌의 링크트리를 만드는 공개 제작 키트입니다. DoRms 본 서비스 저장소가 아닙니다.
 
 작업을 시작하면 `AGENTS.md`의 질문 목록과 고정 규칙을 그대로 따르세요. 사용자가 충분한 정보를 주지 않았다면 링크를 만들기 전에 필요한 정보를 먼저 물어보세요.
 
-수정 범위는 되도록 `src/config/linktree.ts`와 `src/config/theme.ts`로 제한하세요. 디자인 구조를 바꾸는 경우에도 첫 번째 탭 `도름스 커뮤니티 나의 활동`과 `/assets/dorms-community.png`는 유지하세요.
+수정 범위는 되도록 `src/config/linktree.ts`, `src/config/theme.ts`, `src/config/miyotoon.ts`(연재물 탭을 쓸 때만)로 제한하세요. 디자인 구조를 바꾸는 경우에도 첫 번째 탭 `도름스 커뮤니티 나의 활동`과 `/assets/dorms-community.png`는 유지하세요. 방명록·방문 수를 Firebase에 연결하는 작업은 사용자가 명확히 요청했을 때만 `.env.local`과 `firestore.rules` 안내로 진행하고, 직접 Firebase 프로젝트를 만들거나 키를 발급하려 하지 마세요.
 
 보안상 공개 저장소에 넣으면 안 되는 항목:
 
