@@ -5,8 +5,19 @@ export const profile = {
   introDescription: "미요툰, 미요앱 시리즈로 미요 세계관을 위한 실험실",
   catalogTitle: "미요Lab 활동 탭",
   catalogDescription: "미요앱 시리즈와 소개를 구경해보세요.",
+  /* 왼쪽 프로필 사진입니다. public/assets/ 안에 파일을 넣고 경로를 적으세요. */
   photo: { src: "/assets/miyo-profile.png", alt: "더드미요 캐릭터" },
-  miniroom: { src: "/assets/miyo-miniroom.png", alt: "미요 미니룸" }
+  /* 홈 탭 위쪽 미니룸 이미지입니다. public/assets/ 안에 파일을 넣고 경로를 적으세요. */
+  miniroom: { src: "/assets/miyo-miniroom.png", alt: "미요 미니룸" },
+  /* 아래는 탭 이름표입니다. 나만의 이름으로 바꿔도 되고, 안 바꾸면 기본값 그대로 나옵니다. */
+  storyLabel: "미요툰",
+  boardLabel: "미요앱",
+  boardSubtitle: "앱과 게시글",
+  boardEmptyText: "아직 올린 글이 없습니다.",
+  photoLabel: "사진첩",
+  photoSubtitlePrefix: "미요 캐릭터",
+  /* 오른쪽 위, 옛날 싸이월드 주소창을 흉내 낸 문구입니다. */
+  displayUrl: "http://cyworld.com/miyolab"
 };
 
 /* 프로필 탭에 들어가는 소개 글입니다. 문구만 바꿔서 쓰세요. */

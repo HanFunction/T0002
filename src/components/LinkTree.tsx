@@ -25,11 +25,20 @@ import {
 } from "@/config/linktree";
 import { theme } from "@/config/theme";
 
-const ALL_TABS = ["홈", "프로필", "미요툰", "미요앱", "사진첩"] as const;
+const ALL_TABS = ["home", "profile", "story", "board", "photo"] as const;
 type TabName = (typeof ALL_TABS)[number];
 
-/* 연재물(미요툰)이 하나도 없으면 탭 자체를 숨깁니다. */
-const TABS: TabName[] = ALL_TABS.filter(tab => tab !== "미요툰" || episodes.length > 0);
+/* 연재물이 하나도 없으면 탭 자체를 숨깁니다. */
+const TABS: TabName[] = ALL_TABS.filter(tab => tab !== "story" || episodes.length > 0);
+
+/* 탭 버튼과 오른쪽 위 제목에 쓰는 이름표입니다. profile.ts 값을 따릅니다. */
+const NAV_LABELS: Record<TabName, string> = {
+  home: "홈",
+  profile: "프로필",
+  story: profile.storyLabel,
+  board: profile.boardLabel,
+  photo: profile.photoLabel
+};
 
 /* 진입 화면 셰이더 배경 설정입니다. 색은 theme.ts 를 따릅니다. */
 const spiralProps = {
@@ -90,11 +99,11 @@ function IntroOverlay({ onBrowse }: { onBrowse: () => void }) {
 }
 
 const TAB_TITLES: Record<TabName, string> = {
-  홈: profile.catalogTitle,
-  프로필: "프로필",
-  미요툰: "미요툰",
-  미요앱: "미요앱",
-  사진첩: "사진첩"
+  home: profile.catalogTitle,
+  profile: "프로필",
+  story: profile.storyLabel,
+  board: profile.boardLabel,
+  photo: profile.photoLabel
 };
 
 function SectionTitle({ title, sub }: { title: string; sub?: string }) {
@@ -200,7 +209,7 @@ function StoryTab() {
 
   return (
     <div className="cy-content-box">
-      <SectionTitle title="미요툰" sub={`전체 ${episodes.length}화`} />
+      <SectionTitle title={profile.storyLabel} sub={`전체 ${episodes.length}화`} />
       <ul className="cy-episode-grid">
         {episodes.map(episode => (
           <li key={episode.id}>
@@ -223,12 +232,10 @@ function StoryTab() {
 function BoardTab() {
   return (
     <div className="cy-content-box">
-      <SectionTitle title="미요앱" sub="앱과 게시글" />
+      <SectionTitle title={profile.boardLabel} sub={profile.boardSubtitle} />
       {boardPosts.length === 0 ? (
         <div className="cy-empty-box">
-          아직 올린 글이 없습니다.
-          <br />
-          미요앱과 게시글 링크를 여기에 하나씩 추가할 예정입니다.
+          {profile.boardEmptyText}
         </div>
       ) : (
         <ul className="cy-board-list">
@@ -405,7 +412,7 @@ function VisitCounter() {
 function PhotoTab() {
   return (
     <div className="cy-content-box">
-      <SectionTitle title="사진첩" sub={`미요 캐릭터 ${photos.length}컷`} />
+      <SectionTitle title={profile.photoLabel} sub={`${profile.photoSubtitlePrefix} ${photos.length}컷`} />
       <ul className="cy-photo-grid">
         {photos.map(photo => (
           <li key={photo.id} className="cy-photo-item">
@@ -420,7 +427,7 @@ function PhotoTab() {
 }
 
 export default function LinkTree() {
-  const [activeTab, setActiveTab] = useState<TabName>("홈");
+  const [activeTab, setActiveTab] = useState<TabName>("home");
   const [introSkipped, setIntroSkipped] = useState(false);
   const bgmRef = useRef<BgmHandle>(null);
 
@@ -505,15 +512,15 @@ export default function LinkTree() {
             <div className="cy-right-panel">
               <div className="cy-right-header">
                 <span className="cy-title">{TAB_TITLES[activeTab]}</span>
-                <span className="cy-url">http://cyworld.com/miyolab</span>
+                <span className="cy-url">{profile.displayUrl}</span>
               </div>
 
               <div className="cy-right-content">
-                {activeTab === "홈" && <HomeTab />}
-                {activeTab === "프로필" && <ProfileTab />}
-                {activeTab === "미요툰" && <StoryTab />}
-                {activeTab === "미요앱" && <BoardTab />}
-                {activeTab === "사진첩" && <PhotoTab />}
+                {activeTab === "home" && <HomeTab />}
+                {activeTab === "profile" && <ProfileTab />}
+                {activeTab === "story" && <StoryTab />}
+                {activeTab === "board" && <BoardTab />}
+                {activeTab === "photo" && <PhotoTab />}
               </div>
             </div>
 
@@ -525,7 +532,7 @@ export default function LinkTree() {
                   className={"cy-tab-btn " + (activeTab === tab ? "active" : "")}
                   onClick={() => setActiveTab(tab)}
                 >
-                  <span className="cy-tab-line">{tab}</span>
+                  <span className="cy-tab-line">{NAV_LABELS[tab]}</span>
                 </button>
               ))}
             </div>

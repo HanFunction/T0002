@@ -1,27 +1,31 @@
 # Copilot Instructions
 
-This is a public DoRms community linktree template, not the DoRms production app.
+This is a public DoRms community mini-homepage (Cyworld-style) linktree kit, not the DoRms production app. Whoever is asking wants their own site, not the original author's (미요Lab).
 
-Before customizing, ask the user for (required):
+If the current folder is still the original template (not yet the user's own copy) and they only gave the source URL, fork it yourself with `gh repo fork https://github.com/Pcallpang/miyo-lab --fork-name <name> --clone --remote` (ask for a name, default `mini-homepage`) instead of asking them to fork manually. Update `package.json`'s `name`/`homepage`/`repository.url` to match.
 
-- Display name, for example `DoRms 교사 OOO`
+Before customizing, present this as one checklist in a single message, not asked one at a time:
+
+Required (site can't work without these):
+- Display name
 - Intro sentence
-- DoRms community activity links for the top required tab
-- External links and grouped inner links
+- DoRms community activity link (goes into the first entry of the bottom-left "wave" quick-link list)
 - Preferred color mood
-- Preferred icons from `public/icons`
 
-Then ask if they want any of these optional features, and skip whichever they don't want:
-
+Optional (skip whichever they don't want, leave the array empty):
+- Left-side profile photo and mini-room image (image files, placed under `public/assets/`)
 - Profile intro sections (bio text, activity list, contact)
-- Board tab (app/post links with date and optional preview image)
-- Episode/webtoon-style tab (`src/config/miyotoon.ts`), only if episode images already exist under `public/assets/`
-- Photo gallery
-- "Wave" quick-link list (bottom-left)
+- Board tab — its display name and app/post links with date and optional preview image
+- Photo gallery tab — its display name and photos
+- Additional "wave" quick-links (beyond the required DoRms one)
 - Mini-homepage BGM player (YouTube video id plus per-track start times)
 - Seed guestbook entries
 - Real guestbook posting and live visit counting via Firebase (the user must create the Firebase project and fill `.env.local`; do not attempt to create Firebase projects or issue keys yourself)
 
-Keep the first card as `도름스 커뮤니티 나의 활동` and keep `/assets/dorms-community.png` as its image. Do not add private DoRms service assets, private credentials, API code, auth code, database code, or product-specific images.
+Don't ask about the episode/webtoon tab (`src/config/miyotoon.ts`) — leave `episodes` empty by default (the tab hides itself) unless the user brings it up first.
 
-Prefer editing `src/config/linktree.ts` and `src/config/theme.ts` (and `src/config/miyotoon.ts` only if the episode tab is used). Run `npm run build` after changes.
+This repo ships with the original author's real content already filled in (profile, bio, board posts, photos, wave links, BGM, guestbook). Clear all of that out before filling in the user's answers — don't leave it as a fallback.
+
+Keep the bottom-left wave list's first entry as `도름스 커뮤니티 나의 활동`. There is no main link-card list feature in this template — don't rebuild one. Do not add private DoRms service assets, private credentials, API code, auth code, database code, or product-specific images.
+
+Edit `src/config/linktree.ts` and `src/config/theme.ts` (and `src/config/miyotoon.ts` only if the episode tab is used). Run `npm run build` after changes, then push to the user's repo and, once GitHub Pages deploys, tell them the live URL as your final message.
