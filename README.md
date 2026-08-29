@@ -32,10 +32,10 @@ npm run dev
 
 직접 고치고 싶다면 아래 파일들을 순서대로 봅니다.
 
-1. `src/config/linktree.ts` — 표시 이름, 소개 문구, 자기소개 섹션, 링크 카드, 게시판, 사진첩, 파도타기, BGM 목록, 방명록 예시 글이 모두 여기 있습니다.
-2. `src/config/miyotoon.ts` — 연재물(웹툰형) 탭을 쓸 때 회차와 컷 이미지 경로를 넣습니다. 안 쓰면 이 파일을 비워도 됩니다.
+1. `src/config/linktree.ts` — 표시 이름, 소개 문구, 자기소개 섹션, 게시판, 사진첩, 파도타기, BGM 목록, 방명록 예시 글이 모두 여기 있습니다.
+2. `src/config/miyotoon.ts` — 연재물(웹툰형) 탭을 쓸 때 회차와 컷 이미지 경로를 넣습니다. 안 쓰면 이 파일을 비워도 됩니다(탭이 자동으로 숨겨집니다).
 3. `src/config/theme.ts` — 전체 색상(`colors`)과 아이콘 배경색(`pillColors`)을 바꿉니다.
-4. 첫 번째 카드인 `도름스 커뮤니티 나의 활동`은 항상 맨 위에 둡니다.
+4. 왼쪽 아래 파도타기 목록의 첫 번째 항목인 `도름스 커뮤니티 나의 활동`은 항상 맨 위에 둡니다.
 5. 사진·미니룸 이미지는 `public/assets/` 안에 미리 넣어두고 그 경로를 config에 적습니다.
 6. 배포 주소가 생기면 `.env.example`을 참고해 `.env.local`을 만들고 `NEXT_PUBLIC_SITE_URL`, (GitHub Pages라면) `NEXT_PUBLIC_BASE_PATH`를 설정합니다.
 
@@ -45,11 +45,11 @@ npm run dev
 
 ## AI에게 맡길 때
 
-가장 쉬운 방법: 이 저장소를 포크한 뒤, 쓰고 있는 AI 코딩 도구에 이렇게만 말하세요.
+가장 쉬운 방법: 포크할 필요 없이, 이 저장소 링크를 그대로 쓰고 있는 AI 코딩 도구에 주면서 이렇게만 말하세요.
 
-> 이 깃허브 저장소로 내 미니홈피 링크트리를 만들고 싶어: (자기 저장소 링크). `docs/AI_CUSTOMIZE_PROMPT.md`를 읽고 그대로 진행해줘.
+> 이 깃허브 저장소로 내 미니홈피 링크트리를 만들고 싶어: https://github.com/Pcallpang/miyo-lab . `docs/AI_CUSTOMIZE_PROMPT.md`를 읽고 그대로 진행해줘.
 
-파일을 직접 열어보거나 내용을 복사해서 붙여넣을 필요 없이, AI가 알아서 `docs/AI_CUSTOMIZE_PROMPT.md`를 읽고 질문하거나(또는 미리 채워둔 [docs/나만의-링크트리-양식.md](docs/나만의-링크트리-양식.md)를 반영해서) 코드를 수정합니다.
+파일을 직접 열어보거나 내용을 복사해서 붙여넣을 필요 없이, AI가 `docs/AI_CUSTOMIZE_PROMPT.md`를 읽고 (아직 자기 것으로 복사되지 않았다면 GitHub CLI로 먼저 포크까지) 알아서 진행합니다. 질문에 답하거나, 미리 채워둔 [docs/나만의-링크트리-양식.md](docs/나만의-링크트리-양식.md)를 반영해서 코드를 수정합니다.
 
 이 저장소에는 `AGENTS.md`, `CLAUDE.md`, `.github/copilot-instructions.md`도 들어 있어서, Claude Code처럼 저장소를 직접 열어 쓰는 도구는 별다른 안내 없이도 규칙을 자동으로 따릅니다.
 
