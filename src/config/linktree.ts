@@ -1,50 +1,3 @@
-export type IconName =
-  | "dorms-community"
-  | "naver-blog"
-  | "instagram"
-  | "kakao-chat"
-  | "kakao-group"
-  | "download"
-  | "manual"
-  | "privacy"
-  | "school"
-  | "docs"
-  | "contact"
-  | "magazine"
-  | "code"
-  | "game";
-
-export type Thumb =
-  | { kind: "image"; src: string; alt: string }
-  | { kind: "icon"; icon: IconName };
-
-export type LinkItem = {
-  name: string;
-  description?: string;
-  href: string;
-  thumb?: Thumb;
-};
-
-export type LinkCard =
-  | {
-      kind: "group";
-      id: string;
-      number: string;
-      name: string;
-      description: string;
-      thumb: Thumb;
-      items: LinkItem[];
-    }
-  | {
-      kind: "link";
-      id: string;
-      number: string;
-      name: string;
-      description: string;
-      href: string;
-      thumb: Thumb;
-    };
-
 export const profile = {
   teacherName: "미요Lab",
   title: "미요Lab 미요앱 실험실",
@@ -248,7 +201,8 @@ export const photos: PhotoItem[] = [
   { id: "miyo-15", name: "갸루미요", src: "/assets/miyo/miyo-15.jpg" }
 ];
 
-/* 왼쪽 아래 파도타기 목록입니다. */
+/* 왼쪽 아래 파도타기 목록입니다.
+   고정 규칙: 첫 번째 항목은 반드시 "도름스 커뮤니티 나의 활동" 링크입니다. 지우지 마세요. */
 export type WaveLink = {
   id: string;
   label: string;
@@ -256,9 +210,9 @@ export type WaveLink = {
 };
 
 export const waveLinks: WaveLink[] = [
+  { id: "dorms-activity", label: "도름스 커뮤니티 나의 활동", href: "https://dorms.school/channels/3fad9324-3dee-49ae-8b5c-0a6686d85add" },
   { id: "miyotoon", label: "미요툰 인스타그램", href: "https://www.instagram.com/me_yotoon" },
-  { id: "miyoapp", label: "미요앱 인스타그램", href: "https://www.instagram.com/me_yoapp/" },
-  { id: "dorms", label: "도름스쿨 내 교실", href: "https://dorms.school/channels/3fad9324-3dee-49ae-8b5c-0a6686d85add" }
+  { id: "miyoapp", label: "미요앱 인스타그램", href: "https://www.instagram.com/me_yoapp/" }
 ];
 
 /* 미니홈피 BGM 입니다. 유튜브 영상을 음원으로 씁니다.
@@ -351,36 +305,4 @@ export const guestbook: GuestbookEntry[] = [
   { id: 3, author: "박교사", text: "더드미요 표정 볼 때마다 웃겨요 ㅋㅋㅋ", date: "2026.08.07" },
   { id: 4, author: "코딩하는쌤", text: "미니룸에 있는 캐릭터들 다 이름이 있나요? 궁금해요", date: "2026.08.05" },
   { id: 5, author: "최학생", text: "선생님 홈피 너무 예뻐요 퍼가요~♡", date: "2026.08.01" }
-];
-
-export const cards: LinkCard[] = [
-  {
-    kind: "group",
-    id: "dorms-activity",
-    number: "01",
-    name: "도름스 커뮤니티 나의 활동",
-    description: "DoRms school 내 교실",
-    thumb: { kind: "image", src: "/assets/dorms-community.png", alt: "DoRms community" },
-    items: [
-      { name: "DoRms 내 교실", description: "DoRms school 내 교실 채널입니다.", href: "https://dorms.school/channels/3fad9324-3dee-49ae-8b5c-0a6686d85add", thumb: { kind: "image", src: "/assets/dorms-community.png", alt: "DoRms community" } }
-    ]
-  },
-  {
-    kind: "link",
-    id: "insta-miyotoon",
-    number: "02",
-    name: "미요툰 인스타그램 me_yotoon",
-    description: "@me_yotoon",
-    href: "https://www.instagram.com/me_yotoon",
-    thumb: { kind: "icon", icon: "instagram" }
-  },
-  {
-    kind: "link",
-    id: "insta-miyoapp",
-    number: "03",
-    name: "미요앱 인스타그램 me_yoapp",
-    description: "@me_yoapp",
-    href: "https://www.instagram.com/me_yoapp/",
-    thumb: { kind: "icon", icon: "instagram" }
-  }
 ];

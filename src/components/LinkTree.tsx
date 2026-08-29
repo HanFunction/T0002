@@ -16,7 +16,6 @@ import {
 } from "@/lib/firebase";
 import {
   boardPosts,
-  cards,
   episodes,
   guestbook,
   photos,
@@ -26,8 +25,11 @@ import {
 } from "@/config/linktree";
 import { theme } from "@/config/theme";
 
-const TABS = ["홈", "프로필", "미요툰", "미요앱", "사진첩"] as const;
-type TabName = (typeof TABS)[number];
+const ALL_TABS = ["홈", "프로필", "미요툰", "미요앱", "사진첩"] as const;
+type TabName = (typeof ALL_TABS)[number];
+
+/* 연재물(미요툰)이 하나도 없으면 탭 자체를 숨깁니다. */
+const TABS: TabName[] = ALL_TABS.filter(tab => tab !== "미요툰" || episodes.length > 0);
 
 /* 진입 화면 셰이더 배경 설정입니다. 색은 theme.ts 를 따릅니다. */
 const spiralProps = {
@@ -105,23 +107,8 @@ function SectionTitle({ title, sub }: { title: string; sub?: string }) {
 }
 
 function HomeTab() {
-  const allLinks = cards.flatMap(card => (card.kind === "group" ? card.items : [card]));
-
   return (
     <>
-      <div className="cy-content-box">
-        <SectionTitle title="Updated news" sub={`TODAY ${allLinks.length}건`} />
-        <ul className="cy-news-list">
-          {allLinks.map((l, i) => (
-            <li key={i}>
-              <a href={l.href} target="_blank" rel="noopener noreferrer">
-                {l.name}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-
       <div className="cy-content-box cy-miniroom-box">
         <SectionTitle title="Mini Room" sub="미니룸" />
         <div className="cy-miniroom-inner">
