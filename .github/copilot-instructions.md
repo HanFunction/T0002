@@ -2,7 +2,7 @@
 
 This is a public DoRms community mini-homepage (Cyworld-style) linktree kit, not the DoRms production app. Whoever is asking wants their own site, not the original author's (미요Lab).
 
-If the current folder is still the original template (not yet the user's own copy) and they only gave the source URL, fork it yourself with `gh repo fork https://github.com/Pcallpang/miyo-lab --fork-name <name> --clone --remote` (ask for a name, default `mini-homepage`) instead of asking them to fork manually. Update `package.json`'s `name`/`homepage`/`repository.url` to match.
+If the current folder is still the original template (not yet the user's own copy) and they only gave the source URL, fork it yourself with `gh repo fork https://github.com/Pcallpang/meyo-lab --fork-name <name> --clone --remote` (ask for a name, default `mini-homepage`) instead of asking them to fork manually. Update `package.json`'s `name`/`homepage`/`repository.url` to match.
 
 Before customizing, present this as one checklist in a single message, not asked one at a time:
 

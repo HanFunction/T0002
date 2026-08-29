@@ -39,7 +39,7 @@ npm run dev
 3. `src/config/theme.ts` — 전체 색상(`colors`)과 아이콘 배경색(`pillColors`)을 바꿉니다.
 4. 왼쪽 아래 파도타기 목록의 첫 번째 항목인 `도름스 커뮤니티 나의 활동`은 항상 맨 위에 둡니다.
 5. 프로필 사진·미니룸 이미지·게시판 미리보기·사진첩 사진은 `public/assets/` 안에 미리 넣어두고 그 경로를 config에 적습니다.
-6. 저장소 이름을 "miyo-lab"이 아닌 나만의 이름으로 정했다면 `package.json`의 `name`, `homepage`, `repository.url`도 맞춰 바꿉니다.
+6. 저장소 이름을 "meyo-lab"이 아닌 나만의 이름으로 정했다면 `package.json`의 `name`, `homepage`, `repository.url`도 맞춰 바꿉니다.
 7. 배포 주소가 생기면 `.env.example`을 참고해 `.env.local`을 만들고 `NEXT_PUBLIC_SITE_URL`, (GitHub Pages라면) `NEXT_PUBLIC_BASE_PATH`를 설정합니다. GitHub Pages 자동 배포는 저장소 이름에 맞춰 알아서 계산되므로 보통은 그대로 두면 됩니다.
 
 ## 방명록·방문자 수를 실제로 움직이려면 (선택)
@@ -50,7 +50,7 @@ npm run dev
 
 가장 쉬운 방법: 포크할 필요 없이, 이 저장소 링크를 그대로 쓰고 있는 AI 코딩 도구에 주면서 이렇게만 말하세요.
 
-> 이 깃허브 저장소로 내 미니홈피 링크트리를 만들고 싶어: https://github.com/Pcallpang/miyo-lab . `docs/AI_CUSTOMIZE_PROMPT.md`를 읽고 그대로 진행해줘.
+> 이 깃허브 저장소로 내 미니홈피 링크트리를 만들고 싶어: https://github.com/Pcallpang/meyo-lab . `docs/AI_CUSTOMIZE_PROMPT.md`를 읽고 그대로 진행해줘.
 
 파일을 직접 열어보거나 내용을 복사해서 붙여넣을 필요 없이, AI가 알아서 다음을 진행합니다.
 

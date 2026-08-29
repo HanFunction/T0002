@@ -4,7 +4,7 @@
 
 포크할 필요 없이, 이 저장소 링크를 그대로 자기가 쓰는 AI 코딩 도구에 주면서 이렇게만 말하면 됩니다. 아래 내용을 따로 복사해서 붙여넣을 필요 없습니다.
 
-> 이 깃허브 저장소로 내 링크트리를 만들고 싶어: https://github.com/Pcallpang/miyo-lab . `docs/AI_CUSTOMIZE_PROMPT.md`를 읽고 그대로 진행해줘.
+> 이 깃허브 저장소로 내 링크트리를 만들고 싶어: https://github.com/Pcallpang/meyo-lab . `docs/AI_CUSTOMIZE_PROMPT.md`를 읽고 그대로 진행해줘.
 
 ---
 
@@ -14,11 +14,11 @@
 
 **-1단계 — 원본 저장소면 먼저 내 계정으로, 새 이름으로 복사(fork)하기**
 
-지금 작업 중인 폴더가 이미 사람 자신의 저장소(원본이 아닌 복사본)라면 이 단계는 건너뛰세요. 사람이 원본 저장소 링크(`https://github.com/Pcallpang/miyo-lab`)만 주고 아직 아무것도 복사되지 않은 상태라면, 사람에게 다시 포크해달라고 시키지 말고 당신이 직접 다음을 하세요.
+지금 작업 중인 폴더가 이미 사람 자신의 저장소(원본이 아닌 복사본)라면 이 단계는 건너뛰세요. 사람이 원본 저장소 링크(`https://github.com/Pcallpang/meyo-lab`)만 주고 아직 아무것도 복사되지 않은 상태라면, 사람에게 다시 포크해달라고 시키지 말고 당신이 직접 다음을 하세요.
 
 1. GitHub CLI(`gh`)가 설치·로그인돼 있는지 확인하세요 (`gh auth status`).
 2. 새 저장소 이름을 물어보세요 (한글 대신 영문·숫자·하이픈 권장). 사람이 정하기 어려워하면 기본값 `mini-homepage`를 제안하세요. `<내 GitHub 아이디>.github.io`로 지으면 하위 경로 없이 루트 주소로 서비스됩니다(원하면 이 방식도 안내하세요).
-3. `gh repo fork https://github.com/Pcallpang/miyo-lab --fork-name <정한 이름> --clone --remote` 한 줄로 사람의 GitHub 계정에 새 이름으로 포크하고 로컬로 내려받은 뒤, 그 폴더로 이동해 계속 진행하세요. "miyo-lab"이라는 원래 이름이나 흔적이 새 저장소에 남지 않도록 합니다.
+3. `gh repo fork https://github.com/Pcallpang/meyo-lab --fork-name <정한 이름> --clone --remote` 한 줄로 사람의 GitHub 계정에 새 이름으로 포크하고 로컬로 내려받은 뒤, 그 폴더로 이동해 계속 진행하세요. "meyo-lab"이라는 원래 이름이나 흔적이 새 저장소에 남지 않도록 합니다.
 4. `gh`가 없거나 로그인이 안 돼 있다면, 설치(`https://cli.github.com`)와 `gh auth login` 로그인 절차를 안내한 뒤 다시 시도하세요. 그래도 어려우면 GitHub 웹사이트에서 "Use this template" 버튼으로 새 이름을 직접 지어 복사해달라고 안내하세요.
 5. `package.json`의 `name`, `homepage`, `repository.url` 값을 새 저장소 이름/주소에 맞게 고치세요.
 

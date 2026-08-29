@@ -4,7 +4,7 @@
 
 ## 0단계 — 원본 저장소면 새 이름으로 먼저 포크하기
 
-지금 작업 중인 폴더가 이미 사용자 자신의 저장소라면 건너뛰세요. 원본 링크(`https://github.com/Pcallpang/miyo-lab`)만 받은 상태라면, 사용자에게 포크를 시키지 말고 직접 `gh repo fork https://github.com/Pcallpang/miyo-lab --fork-name <새 저장소 이름> --clone --remote`으로 포크·클론하세요. 새 이름은 사용자에게 물어보고, 정하기 어려워하면 `mini-homepage`를 기본값으로 제안하세요. "miyo-lab"이라는 이름이나 흔적이 새 저장소에 남지 않게 하고, `package.json`의 `name`/`homepage`/`repository.url`도 새 이름에 맞게 고치세요.
+지금 작업 중인 폴더가 이미 사용자 자신의 저장소라면 건너뛰세요. 원본 링크(`https://github.com/Pcallpang/meyo-lab`)만 받은 상태라면, 사용자에게 포크를 시키지 말고 직접 `gh repo fork https://github.com/Pcallpang/meyo-lab --fork-name <새 저장소 이름> --clone --remote`으로 포크·클론하세요. 새 이름은 사용자에게 물어보고, 정하기 어려워하면 `mini-homepage`를 기본값으로 제안하세요. "meyo-lab"이라는 이름이나 흔적이 새 저장소에 남지 않게 하고, `package.json`의 `name`/`homepage`/`repository.url`도 새 이름에 맞게 고치세요.
 
 ## 먼저 물어볼 질문
 
