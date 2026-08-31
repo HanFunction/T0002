@@ -53,6 +53,14 @@ export interface GuestbookEntry {
   message: string;
 }
 
+export interface Episode {
+  id: string;
+  title: string;
+  date: string;
+  imageUrl: string;
+  description?: string;
+}
+
 // 1. 프로필 설정
 export const profile: Profile = {
   name: "준규",
@@ -67,7 +75,7 @@ export const profile: Profile = {
 // 2. 색상 테마 (밝은 교실톤)
 export const themeColor = "classroom";
 
-// 3. 파도타기 링크 (도름스 커뮤니티 링크 유지)
+// 3. 파도타기 링크 (도름스 커뮤니티 링크)
 export const waveLinks: WaveLink[] = [
   {
     title: "도름스 커뮤니티 나의 활동",
@@ -76,7 +84,8 @@ export const waveLinks: WaveLink[] = [
   },
 ];
 
-// 나머지 항목 (미사용)
+// 나머지 항목 (미사용 및 필수 빈 배열)
+export const episodes: Episode[] = [];
 export const profileSections: ProfileSection[] = [];
 export const boardPosts: BoardPost[] = [];
 export const photos: Photo[] = [];
